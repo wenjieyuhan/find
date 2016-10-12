@@ -1,0 +1,375 @@
+import java.util.Random;
+
+public class Tool {
+	static int TRUE = 0;
+	static int FALSE = 1;
+	
+	// 0 true 1 false 2 all
+	public static boolean[][] getArrayByAndOR(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		
+		if(type == 0){
+			boolean[][] s = new boolean[5][];
+			s[0] = new boolean[]{T,T,F};
+			s[1] = new boolean[]{T,T,T};
+			s[2] = new boolean[]{F,F,T};
+			s[3] = new boolean[]{T,F,T};
+			s[4] = new boolean[]{F,T,T};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[3][];
+			s[0] = new boolean[]{F,F,F};
+			s[1] = new boolean[]{T,F,F};
+			s[2] = new boolean[]{T,T,F};
+			return s;
+		}else{
+			boolean[][] s = new boolean[8][];
+			s[0] = new boolean[]{T,T,T};
+			s[1] = new boolean[]{T,T,F};
+			s[2] = new boolean[]{T,F,T};
+			s[3] = new boolean[]{F,T,T};
+			s[4] = new boolean[]{T,F,F};
+			s[5] = new boolean[]{F,F,T};
+			s[6] = new boolean[]{F,T,F};
+			s[7] = new boolean[]{F,F,F};
+			return s;
+		}		
+	}
+	
+	public static boolean[][] getArrayByAndOR_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByAndOR(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;
+	}
+	
+	public static boolean[][] getArrayByAndAnd(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		if(type == 0){
+			boolean[][] s = new boolean[1][];
+			s[0] = new boolean[]{T,T,T};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[7][];
+			s[0] = new boolean[]{F,F,F};
+			s[1] = new boolean[]{T,T,F};
+			s[2] = new boolean[]{T,F,T};
+			s[3] = new boolean[]{F,T,T};
+			s[4] = new boolean[]{T,F,F};
+			s[5] = new boolean[]{F,F,T};
+			s[6] = new boolean[]{F,T,F};
+			return s;
+		}else{
+			boolean[][] s = new boolean[8][];
+			s[0] = new boolean[]{T,T,T};
+			s[1] = new boolean[]{T,T,F};
+			s[2] = new boolean[]{T,F,T};
+			s[3] = new boolean[]{F,T,T};
+			s[4] = new boolean[]{T,F,F};
+			s[5] = new boolean[]{F,F,T};
+			s[6] = new boolean[]{F,T,F};
+			s[7] = new boolean[]{F,F,F};
+			return s;
+		}		
+	}
+	
+	public static boolean[][] getArrayByAndAnd_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByAndAnd(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;	
+	}
+	
+	public static boolean[][] getArrayByOrAnd(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		if(type == 0){
+			boolean[][] s = new boolean[5][];
+			s[0] = new boolean[]{T,T,F};
+			s[1] = new boolean[]{T,F,T};
+			s[2] = new boolean[]{T,T,T};
+			s[3] = new boolean[]{T,F,F};
+			s[4] = new boolean[]{F,T,T};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[3][];
+			s[0] = new boolean[]{F,F,F};
+			s[0] = new boolean[]{F,T,F};
+			s[0] = new boolean[]{F,F,T};
+			return s;
+		}else{
+			boolean[][] s = new boolean[8][];
+			s[0] = new boolean[]{T,T,T};
+			s[1] = new boolean[]{T,T,F};
+			s[2] = new boolean[]{T,F,T};
+			s[3] = new boolean[]{F,T,T};
+			s[4] = new boolean[]{T,F,F};
+			s[5] = new boolean[]{F,F,T};
+			s[6] = new boolean[]{F,T,F};
+			s[7] = new boolean[]{F,F,F};
+			return s;
+		}
+		
+	}
+	
+	public static boolean[][] getArrayByOrAnd_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByOrAnd(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;	
+	}
+	
+	public static boolean[][] getArrayByOrOr(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		if(type == 0){
+			boolean[][] s = new boolean[7][];
+			s[0] = new boolean[]{T,T,T};
+			s[1] = new boolean[]{T,T,F};
+			s[2] = new boolean[]{T,F,T};
+			s[3] = new boolean[]{F,T,T};
+			s[4] = new boolean[]{T,F,F};
+			s[5] = new boolean[]{F,F,T};
+			s[6] = new boolean[]{F,T,F};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[1][];
+			s[0] = new boolean[]{F,F,F};
+			return s;
+		}else{
+			boolean[][] s = new boolean[8][];
+			s[0] = new boolean[]{T,T,T};
+			s[1] = new boolean[]{T,T,F};
+			s[2] = new boolean[]{T,F,T};
+			s[3] = new boolean[]{F,T,T};
+			s[4] = new boolean[]{T,F,F};
+			s[5] = new boolean[]{F,F,T};
+			s[6] = new boolean[]{F,T,F};
+			s[7] = new boolean[]{F,F,F};
+			return s;
+		}	
+	}
+	
+	public static boolean[][] getArrayByOrOr_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByOrOr(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;
+	}
+	//
+	
+	public static boolean[][] getArrayByAnd(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		if(type == 0){
+			boolean[][] s = new boolean[1][];
+			s[0] = new boolean[]{T,T};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[3][];
+			s[0] = new boolean[]{F,F};
+			s[1] = new boolean[]{T,F};
+			s[2] = new boolean[]{F,T};
+			return s;
+		}else{
+			boolean[][] s = new boolean[4][];
+			s[0] = new boolean[]{T,F};
+			s[1] = new boolean[]{T,T};
+			s[2] = new boolean[]{F,T};
+			s[3] = new boolean[]{F,F};
+			return s;
+		}			
+	}
+	
+	public static boolean[][] getArrayByAnd_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByAnd(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;			
+	}
+	
+	public static boolean[][] getArrayByOr(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		if(type == 0){
+			boolean[][] s = new boolean[1][];
+			s[0] = new boolean[]{T,T};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[3][];
+			s[0] = new boolean[]{F,F};
+			s[1] = new boolean[]{T,F};
+			s[2] = new boolean[]{F,T};
+			return s;
+		}else{
+			boolean[][] s = new boolean[4][];
+			s[0] = new boolean[]{T,F};
+			s[1] = new boolean[]{T,T};
+			s[2] = new boolean[]{F,T};
+			s[3] = new boolean[]{F,F};
+			return s;
+		}		
+	}
+	
+	public static boolean[][] getArrayByOr_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByOr(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;		
+	}
+	
+	public  static boolean[][] getArray(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		if(type == 0){
+			boolean[][] s = new boolean[1][];
+			s[0] = new boolean[]{T};
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[1][];
+			s[0] = new boolean[]{F};
+			return s;
+		}else{
+			boolean[][] s = new boolean[2][];
+			s[0] = new boolean[]{T};
+			s[1] = new boolean[]{F};
+			return s;
+		}
+	}
+	
+	public  static boolean[][] getArray_RANOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArray(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;	
+	}
+	
+	public static boolean[][] Connect(boolean[][] x, boolean[][] y ){
+		boolean T = true;
+		boolean F = false;
+		int len = x.length > y.length ? y.length : x.length;
+		int max_len = x.length > y.length ? x.length : y.length;
+		boolean[][] s = new boolean[max_len][];
+		
+		int i = 0;
+		for(; i < len; i++){
+			s[i] = new boolean[x[i].length+ y[i].length];
+			System.arraycopy(x[i], 0, s[i], 0, x[i].length);  
+			System.arraycopy(y[i], 0, s[i], x[i].length, y[i].length);  
+		}
+		
+		if(x.length > y.length){
+			for(int j = i; j < x.length; j++){
+				s[j] = new boolean[x[0].length+ y[0].length];
+				System.arraycopy(x[j], 0, s[j], 0, x[j].length);
+				Random random = new Random();
+				int rand_num = random.nextInt(y.length);
+				System.arraycopy(y[rand_num], 0, s[j], x[j].length, y[rand_num].length);  				
+			}
+		}else if(x.length < y.length){
+			for(int j = i; j < y.length; j++){
+				
+				Random random = new Random();
+				int rand_num = random.nextInt(x.length);
+				s[j] = new boolean[x[0].length+ y[0].length];
+				System.arraycopy(x[rand_num], 0, s[j], 0, x[rand_num].length);
+				System.arraycopy(y[j], 0, s[j], x[rand_num].length, y[j].length);
+				
+			}			
+		}
+		return s;
+	}
+	
+	public static boolean[][] Cross_Join(boolean[][] x, boolean[][] y ){
+		boolean T = true;
+		boolean F = false;
+		int max_len =x.length * y.length;
+//		System.out.println("max_len:"+max_len);
+		boolean[][] s = new boolean[max_len][];
+		
+		int counter = 0;
+		for(int i = 0; i < x.length; i++){
+			for(int j = 0; j < y.length; j++){
+//				System.out.println("counter:"+counter+" x.length:"+x.length+" y.length:"+
+//			y.length+" s.length "+s.length+"("+i+"..."+j+")");
+				
+				s[counter] = new boolean[x[i].length + y[j].length];
+				
+				System.arraycopy(x[i], 0, s[counter], 0, x[i].length);  
+				System.arraycopy(y[j], 0, s[counter], x[i].length, y[j].length);  
+				counter++;
+			}
+		}
+		return s;
+	}
+	
+	public static boolean[][] Cross_Join(boolean[][][]s){
+		if(s.length < 1){
+			return null;
+		}
+		boolean[][] tmp = s[0];
+		for(int i = 1; i < s.length; i++){
+			tmp = Cross_Join(tmp,s[i]);
+		}
+		return tmp;
+	}
+	
+	public static boolean[][] Add(boolean[][] x, boolean[][] y){
+		boolean T = true;
+		boolean F = false;
+		int max_len =x.length + y.length;
+		boolean[][] s = new boolean[max_len][];
+		System.arraycopy(x, 0, s, 0, x.length);  
+		System.arraycopy(y, 0, s, x.length, y.length);  
+		return s;
+	}
+	//TODO compare_arr;
+//	public int[][] compare_arr(int[] arr_x, int[] arr_y, int[][] list){
+//		
+//	}
+	
+	public static int[][] DelTestCase(int[][] arr, int num){
+		if(arr.length < num){
+			return null;
+		}
+		shuffle(arr,new Random());
+		int[][] newArr = new int[arr.length-num][];
+		for(int i=0; i < arr.length-num; i++){
+			newArr[i] = arr[i];
+		}
+		return newArr;
+		
+	}
+	
+    // using the random get the random number
+    public static  void  shuffle(int[][] array, Random random){
+         
+        for(int i = array.length; i >= 1; i--){
+             
+            swap(array,i-1,random.nextInt(i));
+        }
+    }
+     
+    // the two number swap  in the array
+    public static void swap(int[][] array, int i , int j){
+        int[] temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;   
+    }
+}
