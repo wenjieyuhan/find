@@ -1,8 +1,84 @@
+import java.util.ArrayList;
 import java.util.Random;
+
 
 public class Tool {
 	static int TRUE = 0;
 	static int FALSE = 1;
+	public static int generat_test_num(GenerateType type, int pivot, boolean isRight){
+		Random random = new Random();
+		switch(type){
+		case EQUAL:
+			if(isRight){
+				return pivot;
+			}else{
+				return pivot + (random.nextInt(10) + 1) * (random.nextInt(10) % 2 == 0 ? 1 : -1);
+			}
+		case LARGE: 
+			if(isRight){
+				return pivot + random.nextInt(10) + 1;
+			}else{
+				return pivot - random.nextInt(10);
+			}
+		case LARGE_EQUEAL: 
+			
+			if(isRight){
+				return pivot + random.nextInt(10);
+			}else{
+				return pivot - random.nextInt(10) -1;
+			}
+			
+		case LESS_EQUAL:
+			if(isRight){
+				return pivot - random.nextInt(10);
+			}else{
+				return pivot + random.nextInt(10) +1;
+			}
+		case LESS:
+			if(isRight){
+				return pivot - random.nextInt(10) -1;
+			}else{
+				return pivot + random.nextInt(10);
+			}
+		default :
+			break;
+		}
+		return 0;
+	}
+	
+	public static int[] generate_test_num_list(ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list ,boolean[] list){
+		int[] alist = new int[list.length];
+		for(int i = 0; i < list.length; i++){
+			alist[i] = (generat_test_num(GenerateType_list.get(i),num_list.get(i),list[i]));
+		}
+		return alist;
+	}
+	
+	public static int[][] generate_test_num_list_array(ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list,boolean[][] list){
+		int[][] alist = new int[list.length][];
+		for(int i =0; i < list.length; i++){
+			alist[i] = generate_test_num_list(GenerateType_list, num_list, list[i]);
+		}
+		return alist;
+	}
+	public static boolean compare(int a, int b,GenerateType generateType){
+		
+		switch(generateType){
+		case EQUAL:
+			return (a == b);
+		case LARGE: 
+			return ( a > b );
+		case LARGE_EQUEAL: 
+			return ( a >= b );
+		case LESS_EQUAL:
+			return ( a <= b );
+		case LESS:
+			return ( a < b );
+		default :
+			return false;
+		}
+		
+	}
 	
 	// 0 true 1 false 2 all
 	public static boolean[][] getArrayByAndOR(int type){
