@@ -372,6 +372,17 @@ public class Tool {
 		return s;
 	}
 	
+	public static boolean[][] Connect(boolean[][][]s){
+		if(s.length < 1){
+			return null;
+		}
+		boolean[][] tmp = s[0];
+		for(int i = 1; i < s.length; i++){
+			tmp = Connect(tmp,s[i]);
+		}
+		return tmp;
+	}
+	
 	public static boolean[][] Cross_Join(boolean[][] x, boolean[][] y ){
 		boolean T = true;
 		boolean F = false;
@@ -405,6 +416,8 @@ public class Tool {
 		}
 		return tmp;
 	}
+	
+
 	
 	public static boolean[][] Add(boolean[][] x, boolean[][] y){
 		boolean T = true;
