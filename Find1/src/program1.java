@@ -19,7 +19,6 @@ public class program1 implements Comp{
 				num1 += 2;
 			}
 		}else{
-			
 			if(result[4]){
 				num1 +=3;
 			}else{
@@ -163,9 +162,12 @@ public class program1 implements Comp{
 		boolean[][] node1213_true = Tool.getArrayByOr(TRUE);
 		boolean[][] node1213_false = Tool.getArrayByOr(FALSE);
 		
+		
 		boolean[][] node141516_true = Tool.getArrayByAndOR(TRUE);
 		boolean[][] node141516_false = Tool.getArrayByAndOR(FALSE);
 		boolean[][] node141516_all = Tool.getArrayByAndOR(ALL);
+//		System.out.println(node891011_true.length);
+//		System.out.println(node891011_false.length);
 		
 		boolean[][] part3_1 = Tool.Connect(new boolean[][][]{node891011_true,empty_len2,empty_len3});
 	
@@ -174,16 +176,24 @@ public class program1 implements Comp{
 				Tool.Connect(node1213_true, empty_len3), 
 				Tool.Connect(node1213_false,node141516_all));
 		
-		boolean[][] part3 = Tool.Add(
-				part3_1,
-				Tool.Connect (
-						node891011_false,
-						node1213141516_total
-						)
+
+		boolean[][] tmp =Tool.Connect (
+				node891011_false,
+				node1213141516_total
 				);
 		
+		boolean[][] part3 = Tool.Add(
+				part3_1,
+				tmp
+				);
+//		System.out.println(part3_1.length);
+//		System.out.println(tmp.length);
+//		System.out.println(part3.length);
+		
 		boolean[][] path_Testcase = Tool.Connect(new boolean[][][] {part1, part2, part3});
+		
 		int arr[][] = Tool.generate_test_num_list_array(GenerateType_list,num_list,path_Testcase);
+//		System.out.println(arr.length);
 		return arr;
 	}
 
@@ -203,7 +213,7 @@ public class program1 implements Comp{
 				{GenerateType.LESS,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
 						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
 						GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
-						GenerateType.EQUAL,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL
+						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL
 				};
 			for(GenerateType t : gt_arr){
 				GenerateType_list.add(t);
@@ -243,7 +253,7 @@ public class program1 implements Comp{
 				double del_percent = (double)i /100;
 				double coverage = (double)(100-i)/100;
 				System.out.println("coverage:"+ coverage*100+"%");
-				res = Tool.DelTestCase(res, (int)(0.1* tmp.length));
+//				res = Tool.DelTestCase(res, (int)(0.1* tmp.length));
 				int[] result = example.calc_arr(res, GenerateType_list,num_list);
 				System.out.println("Length of test case:"+result.length);
 				if(printDetail)
@@ -262,7 +272,51 @@ public class program1 implements Comp{
 				int found_fault = example.checkBug(diff,GenerateType_list,num_list);
 				System.out.println("found_fault:"+found_fault);
 				System.out.println();
+//				System.out.println((double)freq/100 *  tmp.length);
+				res = Tool.DelTestCase(res, (int)Math.ceil(((double)freq/100* tmp.length)));
 			}
+			
+			System.out.println("MultiCoverage");
+			// example1
+			
+			int [][] tmp_ = example.generateMultiCoverage(GenerateType_list, num_list);
+			
+			int[][] res_ = tmp_;
+			for(int i = 0; i < 100; i+=freq){
+				double del_percent = (double)i /100;
+				double coverage = (double)(100-i)/100;
+				System.out.println("coverage:"+ coverage*100+"%");
+//				res_ = Tool.DelTestCase(res_, (int)(0.1* tmp_.length));
+				int[] result = example.calc_arr(res_, GenerateType_list,num_list);
+				System.out.println("Length of test case:"+result.length);
+				if(printDetail)
+				System.out.println(Arrays.toString(result));
+				
+				int[] result_bug = example_bug.calc_arr(res_, GenerateType_list_1,num_list_1);
+				if(printDetail)
+				System.out.println(Arrays.toString(result_bug));
+				
+				int[][]diff = Tool.compare_arr(result, result_bug, res_);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
+				
+				if(printDetail)
+				Tool.printIntArray(diff);
+				
+				int found_fault = example.checkBug(diff,GenerateType_list,num_list);
+				System.out.println("found_fault:"+found_fault);
+				System.out.println();
+				
+//				res_ = Tool.DelTestCase(res_, (int)(0.1* tmp_.length));
+				if( res_.length > 0){
+					res_ = Tool.DelTestCase(res_, (int)Math.ceil(((double)freq/100* tmp.length)));
+					if(res_.length == 0){
+						break;
+					}
+				}else{
+					break;
+				}
+			}
+			
 			
 //			
 //			//del whatever you want del 10%
@@ -294,7 +348,7 @@ public class program1 implements Comp{
 	@Override
 	public int checkBug(int[][] arr, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
 		
-//		int bug[] = {0,0,0,0,0};
+		int bugs[] = {0,0,0,0,0};
 		
 		for(int i = 0 ; i < arr.length; i++){
 			int bug[] = {0,0,0,0,0};
@@ -305,33 +359,43 @@ public class program1 implements Comp{
 				result[j] = (Tool.compare(arr[i][j], num_list.get(j), GenerateType_list.get(j)));
 //				result[j] = false;
 			}
+			boolean error13 = Tool.compare(arr[i][13], 1, GenerateType_list.get(16));
+			
 //			System.out.println(result[5] + ".."+result[6]);
 //			System.out.println(Arrays.toString(result));
-			if((result[0] && result[1] && result[2]) == false &&result[4] != result[5]){
+			if((result[8] && result[9]  || result[10] &&result[11] ) == false 
+					&&((result[12] && result[13]) == false) 
+					&& (result[14]|| result[15]  && result[16]) == false
+							){
 				bug[0] = 1;
+				bugs[0] = 1;
 			}
-//			if(result[12] == true && result[13] == false || result[12] == false && result[13] == true ){
-//				bug[1] = 1;
-//			}
-//			if(!(result[8] && result[9]  || result[10] &&result[11])&&!(result[12] || result[13] )&&!(result[14]|| result[15]  && result[16])){
-//				bug[2] = 1;
-//			}
-//			if(result[5] != result[6]){
-//				bug[3] = 1;
-//			}
-//			if((result[0] && result[1] || result[2] ) != (result[0] && result[1] && result[2])){
-//				bug[4] = 1;
-//			}
-//			System.out.println(i+":"+Arrays.toString(bug));
+			if(result[0] ==true && result[1] == true && result[2] == false ){
+				bug[1] = 1;
+				bugs[1] = 1;
+			}
+			if(result[7]){
+				bug[2] = 1;
+				bugs[2] = 1;
+			}
+			if(result[12] == false && result[13] == true || result[12] == true && result[13] == false){
+				bug[3] = 1;
+				bugs[3] = 1;
+			}
+			if((result[5] || result[6]) == false&& result[7] == true){
+				bug[4] = 1;
+				bugs[4] = 1;
+			}
+			System.out.println(i+":"+Arrays.toString(bug));
 		}
-//		int count = 0;
-//		for(int i = 0; i < 5; i++){
-//			if(bug[i] == 1){
-//				count++;
-//			}
-//		}
-//		return count;
-		return 0;
+		int count = 0;
+		for(int l = 0; l < 5; l++){
+			if(bugs[l] == 1){
+				count++;
+			}
+		}
+		return count;
+//		return 0;
 
 		
 		

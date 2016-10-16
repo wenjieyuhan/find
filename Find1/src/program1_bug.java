@@ -11,10 +11,9 @@ public class program1_bug implements Comp{
 		for(int i = 0; i < val.length; i++){
 			result[i] = (Tool.compare(val[i], num_list.get(i), GenerateType_list.get(i)));
 		}
-		
-		if(result[0] && result[1] && result[2]){
-			//result(3) -> result[2]  
-			if(result[2]){
+		//result[0] result[1] result[2]
+		if(result[0] && result[1]){
+			if(result[3]){
 				num1 = num1 * 2;
 			}else{
 				num1 += 2;
@@ -27,12 +26,12 @@ public class program1_bug implements Comp{
 				num1 -=2;
 			}
 		}
-		
 		if(result[5] || result[6]){
 			num1 += 2;
 		}else{
 			if(result[7]){
-				num1 +=1;
+//				num1 += 2 --> num2 *= 2
+				num1 *=2;
 			}else{
 				num1 +=3;
 			}
@@ -40,13 +39,15 @@ public class program1_bug implements Comp{
 		if(result[8] && result[9]  || result[10] &&result[11]){
 			num1 -= 9;
 		}else{
-			if(result[12]|| result[13]){
+			//bug result[12] || result[13] -->result[12] && result[13]
+			if(result[12] && result[13]){
 				num1 += 5;
 			}else{
 				if(result[14]|| result[15]  && result[16]){
 					num1 -= 6;
 				}else{
-					num1 *= 2;
+					//num1 *= 2 --> num+=2
+					num1 += 2;
 				}
 			}
 		}
