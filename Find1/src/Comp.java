@@ -9,4 +9,5 @@ public interface Comp {
 	public int[] calc_arr(int[][] val,ArrayList<GenerateType>GenerateType_list,ArrayList<Integer> num_list);
 	public int [][] generatePathCoverage(ArrayList<GenerateType>GenerateType_list,ArrayList<Integer> num_list);
 	public int [][] generateMultiCoverage(ArrayList<GenerateType>GenerateType_list,ArrayList<Integer> num_list);
+	public int checkBug(int[][] arr, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list);
 }

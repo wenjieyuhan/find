@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class program1 implements Comp{
+public class program1_bug implements Comp{
 
 	@Override
 	public int calc(int[] val, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
@@ -13,7 +13,8 @@ public class program1 implements Comp{
 		}
 		
 		if(result[0] && result[1] && result[2]){
-			if(result[3]){
+			//result(3) -> result[2]  
+			if(result[2]){
 				num1 = num1 * 2;
 			}else{
 				num1 += 2;
@@ -26,6 +27,7 @@ public class program1 implements Comp{
 				num1 -=2;
 			}
 		}
+		
 		if(result[5] || result[6]){
 			num1 += 2;
 		}else{
@@ -188,19 +190,15 @@ public class program1 implements Comp{
 	}
 
 	public static void main(String[] args) {
-		    boolean printDetail = false;
-		    int freq = 10;
-			//right program
 			ArrayList<Integer> num_list = new ArrayList<Integer>(); 
 			ArrayList<GenerateType> GenerateType_list = new ArrayList<GenerateType>(); 
 			int arr[] = {1,3,5,7,9,3,2,5,1,6,4,2,3,6,9,10,2};
 			for(int val: arr){
 				num_list.add(val);
 			}
-			
-			//set up type; 
+			//set up type; 16
 			GenerateType gt_arr[] = 
-				{GenerateType.LESS,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
+				{GenerateType.EQUAL,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
 						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
 						GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
 						GenerateType.EQUAL,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL
@@ -208,83 +206,30 @@ public class program1 implements Comp{
 			for(GenerateType t : gt_arr){
 				GenerateType_list.add(t);
 			}
-			
-			//seeded program
-
-			ArrayList<Integer> num_list_1 = new ArrayList<Integer>(); 
-			ArrayList<GenerateType> GenerateType_list_1 = new ArrayList<GenerateType>(); 
-			int arr_1[] = {1,3,5,7,9,3,2,5,1,6,4,2,3,6,9,10,2};
-			// no4 9 no8 5
-			for(int val: arr_1){
-				num_list_1.add(val);
-			}
-			
-			//set up type; 
-			GenerateType gt_arr_1[] = 
-				
-				{GenerateType.LESS,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
-						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
-						GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
-						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL
-				};
-			for(GenerateType t : gt_arr_1){
-				GenerateType_list_1.add(t);
-			}
+			program1_bug example = new program1_bug();
 			
 			
-			program1 example = new program1();
-			program1_bug example_bug = new program1_bug();
-			System.out.println("PathCoverage");
-			// example1
+			int[][] res = example.generatePathCoverage(GenerateType_list, num_list);
+			int[] result = example.calc_arr(res, GenerateType_list,num_list);
+			System.out.println(result.length);
+			System.out.println(Arrays.toString(result));
 			
-			int [][] tmp = example.generatePathCoverage(GenerateType_list, num_list);
-			int[][] res = tmp;
-			for(int i = 0; i < 100; i+=freq){
-				double del_percent = (double)i /100;
-				double coverage = (double)(100-i)/100;
-				System.out.println("coverage:"+ coverage*100+"%");
-				res = Tool.DelTestCase(res, (int)(0.1* tmp.length));
-				int[] result = example.calc_arr(res, GenerateType_list,num_list);
-				System.out.println("Length of test case:"+result.length);
-				if(printDetail)
-				System.out.println(Arrays.toString(result));
-				
-				int[] result_bug = example_bug.calc_arr(res, GenerateType_list_1,num_list_1);
-				if(printDetail)
-				System.out.println(Arrays.toString(result_bug));
-				
-				int[][]diff = Tool.compare_arr(result, result_bug, res);
-				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
-				
-				if(printDetail)
-				Tool.printIntArray(diff);
-				
-				int found_fault = example.checkBug(diff,GenerateType_list,num_list);
-				System.out.println("found_fault:"+found_fault);
-				System.out.println();
-			}
+			//del whatever you want del 10%
+			int[][] new_res = Tool.DelTestCase(res, (int)(0.1* res.length));
+			int[] result2 = example.calc_arr(new_res,GenerateType_list,num_list);
+			System.out.println(result2.length);
+			System.out.println(Arrays.toString(result2));	
 			
-//			
-//			//del whatever you want del 10%
-//			int[][] new_res = Tool.DelTestCase(res, (int)(0.1* res.length));
-//			int[] new_result2 = example.calc_arr(new_res,GenerateType_list,num_list);
-//			System.out.println(new_result2.length);
-//			System.out.println(Arrays.toString(new_result2));	
+			int[][] res1 = example.generateMultiCoverage(GenerateType_list, num_list);
+			int[] result1 = example.calc_arr(res1, GenerateType_list,num_list);
+			System.out.println(result1.length);
+			System.out.println(Arrays.toString(result1));
 			
-//			
-//			
-//			System.out.println("");
-//			System.out.println("MultiCoverage");
-//			int[][] res1 = example.generateMultiCoverage(GenerateType_list, num_list);
-//			int[] result1 = example.calc_arr(res1, GenerateType_list,num_list);
-//			System.out.println(result1.length);
-//			System.out.println(Arrays.toString(result1));
-//			
-//			//del whatever you want del 10%
-//			int[][] new_res1 = Tool.DelTestCase(res1, (int)(0.1* res1.length+1));
-//			int[] result3 = example.calc_arr(new_res1,GenerateType_list,num_list);
-//			System.out.println(result3.length);
-//			System.out.println(Arrays.toString(result3));	
+			//del whatever you want del 10%
+			int[][] new_res1 = Tool.DelTestCase(res1, (int)(0.1* res1.length+1));
+			int[] result3 = example.calc_arr(new_res1,GenerateType_list,num_list);
+			System.out.println(result3.length);
+			System.out.println(Arrays.toString(result3));	
 			
 			
 			
@@ -293,49 +238,10 @@ public class program1 implements Comp{
 
 	@Override
 	public int checkBug(int[][] arr, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
-		
-//		int bug[] = {0,0,0,0,0};
-		
-		for(int i = 0 ; i < arr.length; i++){
-			int bug[] = {0,0,0,0,0};
-//			System.out.println(arr[i].length);
-
-			boolean[] result = new boolean[arr[i].length];
-			for(int j = 0; j < arr[i].length; j++){
-				result[j] = (Tool.compare(arr[i][j], num_list.get(j), GenerateType_list.get(j)));
-//				result[j] = false;
-			}
-//			System.out.println(result[5] + ".."+result[6]);
-//			System.out.println(Arrays.toString(result));
-			if((result[0] && result[1] && result[2]) == false &&result[4] != result[5]){
-				bug[0] = 1;
-			}
-//			if(result[12] == true && result[13] == false || result[12] == false && result[13] == true ){
-//				bug[1] = 1;
-//			}
-//			if(!(result[8] && result[9]  || result[10] &&result[11])&&!(result[12] || result[13] )&&!(result[14]|| result[15]  && result[16])){
-//				bug[2] = 1;
-//			}
-//			if(result[5] != result[6]){
-//				bug[3] = 1;
-//			}
-//			if((result[0] && result[1] || result[2] ) != (result[0] && result[1] && result[2])){
-//				bug[4] = 1;
-//			}
-//			System.out.println(i+":"+Arrays.toString(bug));
-		}
-//		int count = 0;
-//		for(int i = 0; i < 5; i++){
-//			if(bug[i] == 1){
-//				count++;
-//			}
-//		}
-//		return count;
+		// TODO Auto-generated method stub
 		return 0;
-
-		
-		
 	}
-	
+
+
 	
 }

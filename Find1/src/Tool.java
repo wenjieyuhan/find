@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -79,6 +80,64 @@ public class Tool {
 		}
 		
 	}
+	
+	
+	public static boolean[][] getArrayByAndOrAnd(int type){
+		boolean T = true;
+		boolean F = false;
+		
+		
+		if(type == 0){
+			boolean[][] s = new boolean[7][];
+			s[0] = new boolean[]{T,T,F,F};
+			s[1] = new boolean[]{T,T,F,T};
+			s[2] = new boolean[]{T,T,T,F};
+			s[3] = new boolean[]{T,T,T,T};
+			s[4] = new boolean[]{T,F,T,T};
+			s[5] = new boolean[]{F,T,T,T};
+			s[6] = new boolean[]{F,F,T,T};
+
+			return s;
+		}else if(type == 1){
+			boolean[][] s = new boolean[9][];
+			s[0] = new boolean[]{T,F,T,F};
+			s[1] = new boolean[]{T,F,F,T};
+			s[2] = new boolean[]{T,F,F,F};
+			s[3] = new boolean[]{F,T,F,T};
+			s[4] = new boolean[]{F,T,T,F};
+			s[5] = new boolean[]{F,T,F,F};
+			s[6] = new boolean[]{F,F,T,F};
+			s[7] = new boolean[]{F,F,F,T};
+			s[8] = new boolean[]{F,F,F,F};
+			return s;
+		}else{
+			boolean[][] s = new boolean[16][];
+			s[0] = new boolean[]{T,T,F,F};
+			s[1] = new boolean[]{T,T,F,T};
+			s[2] = new boolean[]{T,T,T,F};
+			s[3] = new boolean[]{T,T,T,T};
+			s[4] = new boolean[]{T,F,T,T};
+			s[5] = new boolean[]{F,T,T,T};
+			s[6] = new boolean[]{F,F,T,T};
+			s[7] = new boolean[]{T,F,T,F};
+			s[8] = new boolean[]{T,F,F,T};
+			s[9] = new boolean[]{T,F,F,F};
+			s[10] = new boolean[]{F,T,F,T};
+			s[11] = new boolean[]{F,T,T,F};
+			s[12] = new boolean[]{F,T,F,F};
+			s[13] = new boolean[]{F,F,T,F};
+			s[14] = new boolean[]{F,F,F,T};
+			s[15] = new boolean[]{F,F,F,F};
+			return s;
+		}
+	}
+	public static boolean[][] getArrayByAndOrAnd_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByAndOrAnd(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;
+	}	
 	
 	// 0 true 1 false 2 all
 	public static boolean[][] getArrayByAndOR(int type){
@@ -429,9 +488,19 @@ public class Tool {
 		return s;
 	}
 	//TODO compare_arr;
-//	public int[][] compare_arr(int[] arr_x, int[] arr_y, int[][] list){
-//		
-//	}
+	public static int[][] compare_arr(int[] arr_x, int[] arr_y, int[][] list){
+		int[][] arr_tmp = new int[arr_x.length][];
+		int len = 0;
+		for(int i = 0; i < arr_x.length; i++){
+			if(arr_x[i] != arr_y[i]){
+				arr_tmp[len] = list[i];
+				len++;
+			}
+		}
+		int[][] arr_final = new int[len][];
+		System.arraycopy(arr_tmp, 0, arr_final, 0, len);
+		return arr_final;
+	}
 	
 	public static int[][] DelTestCase(int[][] arr, int num){
 		if(arr.length < num){
@@ -460,5 +529,10 @@ public class Tool {
         int[] temp = array[i];
         array[i] = array[j];
         array[j] = temp;   
+    }
+    public static void printIntArray(int[][]array){
+    	for(int i = 0; i < array.length; i++){
+    		System.out.println(Arrays.toString(array[i]));
+    	}
     }
 }
