@@ -244,7 +244,7 @@ public class program4 implements Comp{
 			
 			
 			program4 example = new program4();
-			program1_bug example_bug = new program1_bug();
+			program4_bug example_bug = new program4_bug();
 			System.out.println("PathCoverage");
 			// example1
 			

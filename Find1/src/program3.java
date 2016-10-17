@@ -257,7 +257,7 @@ public class program3 implements Comp{
 			
 			
 			program3 example = new program3();
-			program1_bug example_bug = new program1_bug();
+			program3_bug example_bug = new program3_bug();
 			System.out.println("PathCoverage");
 			// example1
 			
@@ -347,7 +347,7 @@ public class program3 implements Comp{
 			
 //			System.out.println(result[5] + ".."+result[6]);
 //			System.out.println(Arrays.toString(result));
-			if((result[8] && result[9]  || result[10] &&result[11] ) == false 
+			if((result[8] && result[9]  || result[10] &&result[11] || result[12]) == false 
 					&&((result[12] && result[13]) == false) 
 					&& (result[14]|| result[15]  && result[16]) == false
 							){
@@ -362,7 +362,7 @@ public class program3 implements Comp{
 				bug[2] = 1;
 				bugs[2] = 1;
 			}
-			if(result[17] == false && result[18] == true || result[18] == true && result[17] == false){
+			if(result[17] == false && result[18] == true ){
 				bug[3] = 1;
 				bugs[3] = 1;
 			}

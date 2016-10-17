@@ -6,7 +6,7 @@ public class program1 implements Comp{
 
 	@Override
 	public int calc(int[] val, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
-		int num1 = 3;
+		int num1 = 5;
 		boolean[] result = new boolean[val.length];
 		for(int i = 0; i < val.length; i++){
 			result[i] = (Tool.compare(val[i], num_list.get(i), GenerateType_list.get(i)));
@@ -26,6 +26,7 @@ public class program1 implements Comp{
 			}
 		}
 		if(result[5] || result[6]){
+			
 			num1 += 2;
 		}else{
 			if(result[7]){
@@ -374,7 +375,7 @@ public class program1 implements Comp{
 				bug[1] = 1;
 				bugs[1] = 1;
 			}
-			if(result[7]){
+			if((result[5] || result[6]) == true){
 				bug[2] = 1;
 				bugs[2] = 1;
 			}

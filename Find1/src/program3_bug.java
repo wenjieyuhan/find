@@ -51,8 +51,8 @@ public class program3_bug implements Comp{
 				}
 			}
 		}
-//		result[17] || result[18] =>> result[17] && reuslt[18]
-		if(result[17] && result[18]){
+//		result[17] || result[18] =>> result[17] 
+		if(result[17]){
 			num1 = num1 *2;
 		}else{
 			num1 = num1 - 2;
