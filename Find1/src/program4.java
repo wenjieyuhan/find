@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class program1 implements Comp{
+public class program4 implements Comp{
 
 	@Override
 	public int calc(int[] val, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
@@ -13,11 +13,12 @@ public class program1 implements Comp{
 		}
 		
 		if(result[0] && result[1] && result[2]){
-			if(result[3]){
-				num1 = num1 * 2;
-			}else{
-				num1 += 2;
-			}
+			num1 = num1 *2;
+//			if(result[3]){
+//				num1 = num1 * 2;
+//			}else{
+//				num1 += 2;
+//			}
 		}else{
 			if(result[4]){
 				num1 +=3;
@@ -73,7 +74,7 @@ public class program1 implements Comp{
 		boolean[][] node012_true = Tool.getArrayByAndAnd_RANDOM_ONE(TRUE);
 		boolean[][] node012_false = Tool.getArrayByAndAnd_RANDOM_ONE(FALSE);
 		
-		boolean[][] node3_all = Tool.getArray(ALL);
+		boolean[][] node3_all = empty_len1;
 		boolean[][] node4_all = Tool.getArray(ALL);
 		
 		boolean[][] part1 = Tool.Add(Tool.Cross_Join(Tool.Cross_Join(node012_true,node3_all),empty_len1),
@@ -138,7 +139,7 @@ public class program1 implements Comp{
 		//part1 
 		boolean[][] node012_true = Tool.getArrayByAndAnd(TRUE);
 		boolean[][] node012_false = Tool.getArrayByAndAnd(FALSE);
-		boolean[][] node3_all = Tool.getArray(ALL);
+		boolean[][] node3_all = empty_len1;
 		boolean[][] node4_all = Tool.getArray(ALL);
 		boolean[][] part1 = Tool.Add(
 				Tool.Connect(new boolean[][][]{node012_true,node3_all,empty_len1})
@@ -242,7 +243,7 @@ public class program1 implements Comp{
 			}
 			
 			
-			program1 example = new program1();
+			program4 example = new program4();
 			program1_bug example_bug = new program1_bug();
 			System.out.println("PathCoverage");
 			// example1
@@ -264,7 +265,7 @@ public class program1 implements Comp{
 				System.out.println(Arrays.toString(result_bug));
 				
 				int[][]diff = Tool.compare_arr(result, result_bug, res);
-//				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
 				
 				if(printDetail)
 				Tool.printIntArray(diff);
@@ -297,7 +298,7 @@ public class program1 implements Comp{
 				System.out.println(Arrays.toString(result_bug));
 				
 				int[][]diff = Tool.compare_arr(result, result_bug, res_);
-//				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
 				
 				if(printDetail)
 				Tool.printIntArray(diff);

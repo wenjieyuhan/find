@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class program1 implements Comp{
+public class program3 implements Comp{
 
 	@Override
 	public int calc(int[] val, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
@@ -14,28 +14,28 @@ public class program1 implements Comp{
 		
 		if(result[0] && result[1] && result[2]){
 			if(result[3]){
-				num1 = num1 * 2;
+				num1 = num1 + 3;
 			}else{
-				num1 += 2;
+				num1 -= 2;
 			}
 		}else{
 			if(result[4]){
-				num1 +=3;
+				num1 +=5;
 			}else{
-				num1 -=2;
+				num1 -=6;
 			}
 		}
 		if(result[5] || result[6]){
-			num1 += 2;
+			num1 += 4;
 		}else{
 			if(result[7]){
 				num1 +=1;
 			}else{
-				num1 +=3;
+				num1 *= 2;
 			}
 		}
-		if(result[8] && result[9]  || result[10] &&result[11]){
-			num1 -= 9;
+		if(result[8] && result[9]  || result[10] &&result[11] || result[12]){
+			num1 += 11;
 		}else{
 			if(result[12]|| result[13]){
 				num1 += 5;
@@ -47,6 +47,13 @@ public class program1 implements Comp{
 				}
 			}
 		}
+		
+		if(result[17] || result[18]){
+			num1 = num1 *2;
+		}else{
+			num1 = num1 - 2;
+		}
+		
 		return num1;
 	}
 
@@ -96,32 +103,33 @@ public class program1 implements Comp{
 
 		
 		//part3
-		boolean[][] node891011_true = Tool.getArrayByAndOrAnd_RANDOM_ONE(TRUE);
-		boolean[][] node891011_false = Tool.getArrayByAndOrAnd_RANDOM_ONE(FALSE);
+		boolean[][] node89101112_true = Tool.getArrayByAndOrAndOr_RANDOM_ONE(TRUE);
+		boolean[][] node89101112_false = Tool.getArrayByAndOrAndOr_RANDOM_ONE(FALSE);
 		
-		boolean[][] node1213_true = Tool.getArrayByOr_RANDOM_ONE(TRUE);
-		boolean[][] node1213_false = Tool.getArrayByOr_RANDOM_ONE(FALSE);
+		boolean[][] node13_true = Tool.getArrayByOr_RANDOM_ONE_extra(TRUE,node89101112_false[0][4]);
+		boolean[][] node13_false = Tool.getArrayByOr_RANDOM_ONE_extra(FALSE,node89101112_false[0][4]);
 		
 		boolean[][] node141516_true = Tool.getArrayByAndOR_RANDOM_ONE(TRUE);
 		boolean[][] node141516_false = Tool.getArrayByAndOR_RANDOM_ONE(FALSE);
 		boolean[][] node141516_all = Tool.getArrayByAndOR_RANDOM_ONE(ALL);
 		
-		boolean[][] part3_1 = Tool.Cross_Join(new boolean[][][]{node891011_true,empty_len2,empty_len3});
+		boolean[][] part3_1 = Tool.Cross_Join(new boolean[][][]{node89101112_true,empty_len1,empty_len3});
 	
 		
 		boolean[][] node1213141516_total = Tool.Add(
-				Tool.Cross_Join(node1213_true, empty_len3), 
-				Tool.Cross_Join(node1213_false,node141516_all));
+				Tool.Cross_Join(node13_true, empty_len3), 
+				Tool.Cross_Join(node13_false,node141516_all));
 		
 		
 		boolean[][] part3 = Tool.Add(
 				part3_1,
 				Tool.Connect (
-						node891011_false,
+						node89101112_false,
 						node1213141516_total
 						)
 				);
-		boolean[][] path_Testcase = Tool.Cross_Join(new boolean[][][] {part1, part2, part3});
+		boolean[][] part4 = Tool.getArrayByOr(ALL);
+		boolean[][] path_Testcase = Tool.Cross_Join(new boolean[][][] {part1, part2, part3,part4});
 		int arr[][] = Tool.generate_test_num_list_array(GenerateType_list,num_list,path_Testcase);
 		return arr;
 	}
@@ -156,11 +164,11 @@ public class program1 implements Comp{
 				Tool.Connect(new boolean[][][]{node56_false,node7_all})
 				);
 		
-		boolean[][] node891011_true = Tool.getArrayByAndOrAnd(TRUE);
-		boolean[][] node891011_false = Tool.getArrayByAndOrAnd(FALSE);
+		boolean[][] node89101112_true = Tool.getArrayByAndOrAndOr(TRUE);
+		boolean[][] node89101112_false = Tool.getArrayByAndOrAndOr(FALSE);
 		
-		boolean[][] node1213_true = Tool.getArrayByOr(TRUE);
-		boolean[][] node1213_false = Tool.getArrayByOr(FALSE);
+		boolean[][] node13_true = Tool.getArray(TRUE);
+		boolean[][] node13_false = Tool.getArray(FALSE);
 		
 		
 		boolean[][] node141516_true = Tool.getArrayByAndOR(TRUE);
@@ -169,16 +177,16 @@ public class program1 implements Comp{
 //		System.out.println(node891011_true.length);
 //		System.out.println(node891011_false.length);
 		
-		boolean[][] part3_1 = Tool.Connect(new boolean[][][]{node891011_true,empty_len2,empty_len3});
+		boolean[][] part3_1 = Tool.Connect(new boolean[][][]{node89101112_true,empty_len1,empty_len3});
 	
 		
 		boolean[][] node1213141516_total = Tool.Add(
-				Tool.Connect(node1213_true, empty_len3), 
-				Tool.Connect(node1213_false,node141516_all));
+				Tool.Connect(node13_true, empty_len3), 
+				Tool.Connect(node13_false,node141516_all));
 		
 
 		boolean[][] tmp =Tool.Connect (
-				node891011_false,
+				node89101112_false,
 				node1213141516_total
 				);
 		
@@ -186,11 +194,15 @@ public class program1 implements Comp{
 				part3_1,
 				tmp
 				);
+		
+		boolean[][] part4 = Tool.getArrayByOr(ALL);
+		
+		
 //		System.out.println(part3_1.length);
 //		System.out.println(tmp.length);
 //		System.out.println(part3.length);
 		
-		boolean[][] path_Testcase = Tool.Connect(new boolean[][][] {part1, part2, part3});
+		boolean[][] path_Testcase = Tool.Connect(new boolean[][][] {part1, part2, part3, part4});
 		
 		int arr[][] = Tool.generate_test_num_list_array(GenerateType_list,num_list,path_Testcase);
 //		System.out.println(arr.length);
@@ -203,17 +215,18 @@ public class program1 implements Comp{
 			//right program
 			ArrayList<Integer> num_list = new ArrayList<Integer>(); 
 			ArrayList<GenerateType> GenerateType_list = new ArrayList<GenerateType>(); 
-			int arr[] = {1,3,5,7,9,3,2,5,1,6,4,2,3,6,9,10,2};
+			int arr[] = {1,2,3,7,9,3,2,1,1,4,4,2,3,4,9,3,2,1,2};
 			for(int val: arr){
 				num_list.add(val);
 			}
 			
 			//set up type; 
 			GenerateType gt_arr[] = 
-				{GenerateType.LESS,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
-						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
+				{GenerateType.LARGE,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
+						GenerateType.LESS,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
 						GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
-						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL
+						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL,
+						GenerateType.LESS,GenerateType.LESS_EQUAL	
 				};
 			for(GenerateType t : gt_arr){
 				GenerateType_list.add(t);
@@ -223,7 +236,7 @@ public class program1 implements Comp{
 
 			ArrayList<Integer> num_list_1 = new ArrayList<Integer>(); 
 			ArrayList<GenerateType> GenerateType_list_1 = new ArrayList<GenerateType>(); 
-			int arr_1[] = {1,3,5,7,9,3,2,5,1,6,4,2,3,6,9,10,2};
+			int arr_1[] = {1,2,3,7,9,3,2,1,1,4,4,2,3,4,9,3,2,1,2};
 			// no4 9 no8 5
 			for(int val: arr_1){
 				num_list_1.add(val);
@@ -232,17 +245,18 @@ public class program1 implements Comp{
 			//set up type; 
 			GenerateType gt_arr_1[] = 
 				
-				{GenerateType.LESS,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
-						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
+				{GenerateType.LARGE,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
+						GenerateType.LESS,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
 						GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
-						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL
+						GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL,
+						GenerateType.LESS,GenerateType.LESS_EQUAL
 				};
 			for(GenerateType t : gt_arr_1){
 				GenerateType_list_1.add(t);
 			}
 			
 			
-			program1 example = new program1();
+			program3 example = new program3();
 			program1_bug example_bug = new program1_bug();
 			System.out.println("PathCoverage");
 			// example1
@@ -264,7 +278,7 @@ public class program1 implements Comp{
 				System.out.println(Arrays.toString(result_bug));
 				
 				int[][]diff = Tool.compare_arr(result, result_bug, res);
-//				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
 				
 				if(printDetail)
 				Tool.printIntArray(diff);
@@ -297,7 +311,7 @@ public class program1 implements Comp{
 				System.out.println(Arrays.toString(result_bug));
 				
 				int[][]diff = Tool.compare_arr(result, result_bug, res_);
-//				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
 				
 				if(printDetail)
 				Tool.printIntArray(diff);
@@ -305,42 +319,12 @@ public class program1 implements Comp{
 				int found_fault = example.checkBug(diff,GenerateType_list,num_list);
 				System.out.println("found_fault:"+found_fault);
 				System.out.println();
-				
-//				res_ = Tool.DelTestCase(res_, (int)(0.1* tmp_.length));
-//				if( res_.length > 0){
-					res_ = Tool.DelTestCase(res_, (int)Math.ceil(((double)freq/100* tmp_.length)));
-//					if(res_.length == 0){
-//						break;
-//					}
-//				}else{
-//					break;
-//				}
+
+				res_ = Tool.DelTestCase(res_, (int)Math.ceil(((double)freq/100* tmp_.length)));
+
 			}
 			
-			
-//			
-//			//del whatever you want del 10%
-//			int[][] new_res = Tool.DelTestCase(res, (int)(0.1* res.length));
-//			int[] new_result2 = example.calc_arr(new_res,GenerateType_list,num_list);
-//			System.out.println(new_result2.length);
-//			System.out.println(Arrays.toString(new_result2));	
-//			
-////			
-////			
-//			System.out.println("");
-//			System.out.println("MultiCoverage");
-//			int[][] res1 = example.generateMultiCoverage(GenerateType_list, num_list);
-//			int[] result1 = example.calc_arr(res1, GenerateType_list,num_list);
-//			System.out.println(result1.length);
-//			System.out.println(Arrays.toString(result1));
-//			
-//			//del whatever you want del 10%
-//			int[][] new_res1 = Tool.DelTestCase(res1, (int)(0.1* res1.length+1));
-//			int[] result3 = example.calc_arr(new_res1,GenerateType_list,num_list);
-//			System.out.println(result3.length);
-//			System.out.println(Arrays.toString(result3));	
-//			
-			
+		
 			
 			
 	}
@@ -374,15 +358,15 @@ public class program1 implements Comp{
 				bug[1] = 1;
 				bugs[1] = 1;
 			}
-			if(result[7]){
+			if(result[7] == false){
 				bug[2] = 1;
 				bugs[2] = 1;
 			}
-			if(result[12] == false && result[13] == true || result[12] == true && result[13] == false){
+			if(result[17] == false && result[18] == true || result[18] == true && result[17] == false){
 				bug[3] = 1;
 				bugs[3] = 1;
 			}
-			if((result[5] || result[6]) == false&& result[7] == true){
+			if((result[5] || result[6]) == false&& result[7] == false){
 				bug[4] = 1;
 				bugs[4] = 1;
 			}

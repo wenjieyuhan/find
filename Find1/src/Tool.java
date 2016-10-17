@@ -131,6 +131,96 @@ public class Tool {
 			return s;
 		}
 	}
+	
+	public static boolean[][] getArrayByAndOrAndOr(int type){
+		boolean T = true;
+		boolean F = false;
+		
+//		T || 
+		if(type == 0){
+			boolean[][] s = new boolean[23][];
+			s[0] = new boolean[]{T,T,F,F,F};
+			s[1] = new boolean[]{T,T,F,T,F};
+			s[2] = new boolean[]{T,T,T,F,F};
+			s[3] = new boolean[]{T,T,T,T,F};
+			s[4] = new boolean[]{T,F,T,T,F};
+			s[5] = new boolean[]{F,T,T,T,F};
+			s[6] = new boolean[]{F,F,T,T,F};
+			s[7] = new boolean[]{T,T,F,F,T};
+			s[8] = new boolean[]{T,T,F,T,T};
+			s[9] = new boolean[]{T,T,T,F,T};
+			s[10] = new boolean[]{T,T,T,T,T};
+			s[11] = new boolean[]{T,F,T,T,T};
+			s[12] = new boolean[]{F,T,T,T,T};
+			s[13] = new boolean[]{F,F,T,T,T};
+			s[14] = new boolean[]{T,F,T,F,T};
+			s[15] = new boolean[]{T,F,F,T,T};
+			s[16] = new boolean[]{T,F,F,F,T};
+			s[17] = new boolean[]{F,T,F,T,T};
+			s[18] = new boolean[]{F,T,T,F,T};
+			s[19] = new boolean[]{F,T,F,F,T};
+			s[20] = new boolean[]{F,F,T,F,T};
+			s[21] = new boolean[]{F,F,F,T,T};
+			s[22] = new boolean[]{F,F,F,F,T};
+			return s;
+//		F || F
+		}else if(type == 1){
+			boolean[][] s = new boolean[9][];
+			s[0] = new boolean[]{T,F,T,F,F};
+			s[1] = new boolean[]{T,F,F,T,F};
+			s[2] = new boolean[]{T,F,F,F,F};
+			s[3] = new boolean[]{F,T,F,T,F};
+			s[4] = new boolean[]{F,T,T,F,F};
+			s[5] = new boolean[]{F,T,F,F,F};
+			s[6] = new boolean[]{F,F,T,F,F};
+			s[7] = new boolean[]{F,F,F,T,F};
+			s[8] = new boolean[]{F,F,F,F,F};
+			return s;
+		}else{
+			boolean[][] s = new boolean[32][];
+			s[0] = new boolean[]{T,T,F,F,F};
+			s[1] = new boolean[]{T,T,F,T,F};
+			s[2] = new boolean[]{T,T,T,F,F};
+			s[3] = new boolean[]{T,T,T,T,F};
+			s[4] = new boolean[]{T,F,T,T,F};
+			s[5] = new boolean[]{F,T,T,T,F};
+			s[6] = new boolean[]{F,F,T,T,F};
+			s[7] = new boolean[]{T,F,T,F,F};
+			s[8] = new boolean[]{T,F,F,T,F};
+			s[9] = new boolean[]{T,F,F,F,F};
+			s[10] = new boolean[]{F,T,F,T,F};
+			s[11] = new boolean[]{F,T,T,F,F};
+			s[12] = new boolean[]{F,T,F,F,F};
+			s[13] = new boolean[]{F,F,T,F,F};
+			s[14] = new boolean[]{F,F,F,T,F};
+			s[15] = new boolean[]{F,F,F,F,F};
+			s[16] = new boolean[]{T,T,F,F,F};
+			s[17] = new boolean[]{T,T,F,T,F};
+			s[18] = new boolean[]{T,T,T,F,F};
+			s[19] = new boolean[]{T,T,T,T,F};
+			s[20] = new boolean[]{T,F,T,T,F};
+			s[21] = new boolean[]{F,T,T,T,F};
+			s[22] = new boolean[]{F,F,T,T,F};
+			s[23] = new boolean[]{T,F,T,F,F};
+			s[24] = new boolean[]{T,F,F,T,F};
+			s[25] = new boolean[]{T,F,F,F,F};
+			s[26] = new boolean[]{F,T,F,T,F};
+			s[27] = new boolean[]{F,T,T,F,F};
+			s[28] = new boolean[]{F,T,F,F,F};
+			s[29] = new boolean[]{F,F,T,F,F};
+			s[30] = new boolean[]{F,F,F,T,F};
+			s[31] = new boolean[]{F,F,F,F,F};
+			return s;
+		}
+	}
+	public static boolean[][] getArrayByAndOrAndOr_RANDOM_ONE(int type){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByAndOrAndOr(type);
+		s[0] = arr[random.nextInt(arr.length)];
+		return s;
+	}	
+	
 	public static boolean[][] getArrayByAndOrAnd_RANDOM_ONE(int type){
 		boolean[][] s = new boolean[1][];
 		Random random = new Random();
@@ -367,6 +457,21 @@ public class Tool {
 		return s;		
 	}
 	
+	public static boolean[][] getArrayByOr_RANDOM_ONE_extra(int type, boolean tag){
+		boolean[][] s = new boolean[1][];
+		Random random = new Random();
+		boolean[][] arr = getArrayByOr(type);
+		for(int i = 0; i < arr.length; i++){
+			if(arr[i][0] == tag){
+				s[0] = new boolean[]{arr[i][1]};
+				return s;
+			}
+		}
+		s[0] = new boolean[]{false};
+		return s;	
+	}
+	
+	
 	public  static boolean[][] getArray(int type){
 		boolean T = true;
 		boolean F = false;
@@ -505,6 +610,9 @@ public class Tool {
 	public static int[][] DelTestCase(int[][] arr, int num){
 		if(arr.length < num){
 			return null;
+		}
+		if(arr.length == num){
+			num--;
 		}
 		shuffle(arr,new Random());
 		int[][] newArr = new int[arr.length-num][];
