@@ -347,18 +347,18 @@ public class program2 implements Comp{
 			
 //			System.out.println(result[5] + ".."+result[6]);
 //			System.out.println(Arrays.toString(result));
-			if((result[8] && result[9]  || result[10] &&result[11] ) == false 
+			if((result[8] && result[9]  || result[10] && result[11] ||result[12]) == false 
 					&&((result[12] && result[13]) == false) 
 					&& (result[14]|| result[15]  && result[16]) == false
 							){
 				bug[0] = 1;
 				bugs[0] = 1;
 			}
-			if(result[0] ==true && result[1] == true && result[2] == false ){
+			if(result[0] ==true && result[2] == true && result[1] == false ){
 				bug[1] = 1;
 				bugs[1] = 1;
 			}
-			if(result[7] == false){
+			if(result[0] == true && result[1] == true && result[2] == true && result[3] == true){
 				bug[2] = 1;
 				bugs[2] = 1;
 			}
