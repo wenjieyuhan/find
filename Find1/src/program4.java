@@ -14,11 +14,6 @@ public class program4 implements Comp{
 		
 		if(result[0] && result[1] && result[2]){
 			num1 = num1 *2;
-//			if(result[3]){
-//				num1 = num1 * 2;
-//			}else{
-//				num1 += 2;
-//			}
 		}else{
 			if(result[4]){
 				num1 +=3;
@@ -365,25 +360,27 @@ public class program4 implements Comp{
 //			System.out.println(result[5] + ".."+result[6]);
 //			System.out.println(Arrays.toString(result));
 			if((result[8] && result[9]  || result[10] &&result[11] ) == false 
-					&&((result[12] && result[13]) == false) 
+					&&(result[13]) == false
 					&& (result[14]|| result[15]  && result[16]) == false
 							){
 				bug[0] = 1;
 				bugs[0] = 1;
 			}
-			if(result[0] ==true && result[1] == true && result[2] == false ){
+			if(result[0] && result[1]&& result[2] == false
+					&& result[4] == false
+					){
 				bug[1] = 1;
 				bugs[1] = 1;
 			}
-			if(result[7]){
+			if((result[5]|| result[6]) != result[5]){
 				bug[2] = 1;
 				bugs[2] = 1;
 			}
-			if(result[12] == false && result[13] == true || result[12] == true && result[13] == false){
+			if((result[12]|| result[13]) != result[13]){
 				bug[3] = 1;
 				bugs[3] = 1;
 			}
-			if((result[5] || result[6]) == false&& result[7] == true){
+			if((result[5]) == false&& result[7] == true){
 				bug[4] = 1;
 				bugs[4] = 1;
 			}
