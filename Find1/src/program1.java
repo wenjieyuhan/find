@@ -199,7 +199,7 @@ public class program1 implements Comp{
 	}
 
 	public static void main(String[] args) {
-		    boolean printDetail = false;
+		    boolean printDetail = true;
 		    int freq = 20;
 			//right program
 			ArrayList<Integer> num_list = new ArrayList<Integer>(); 
@@ -253,27 +253,30 @@ public class program1 implements Comp{
 			for(int i = 0; i < 100; i+=freq){
 				double del_percent = (double)i /100;
 				double coverage = (double)(100-i)/100;
-//				System.out.println("coverage:"+ coverage*100+"%");
-//				res = Tool.DelTestCase(res, (int)(0.1* tmp.length));
+				System.out.println("coverage:"+ coverage*100+"%");
 				int[] result = example.calc_arr(res, GenerateType_list,num_list);
-//				System.out.println("Length of test case:"+result.length);
-				if(printDetail)
-				System.out.println(Arrays.toString(result));
+				System.out.println("Length of test case:"+result.length);
+				
+				if(printDetail){
+					System.out.println("result of test case:");
+					System.out.println("right result:"+Arrays.toString(result));
+				}
 				
 				int[] result_bug = example_bug.calc_arr(res, GenerateType_list_1,num_list_1);
+				
 				if(printDetail)
-				System.out.println(Arrays.toString(result_bug));
+				System.out.println("wrong result:"+Arrays.toString(result_bug));
 				
 				int[][]diff = Tool.compare_arr(result, result_bug, res);
-//				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
 				
-				if(printDetail)
-				Tool.printIntArray(diff);
-				
+				if(printDetail){
+					System.out.println("test cases of different result");
+					Tool.printIntArray(diff);
+				}
 				int found_fault = example.checkBug(diff,GenerateType_list,num_list);
 				System.out.println("found_fault:"+found_fault);
 				System.out.println();
-//				System.out.println((double)freq/100 *  tmp.length);
 				res = Tool.DelTestCase(res, (int)Math.ceil(((double)freq/100* tmp.length)));
 			}
 			
@@ -286,64 +289,34 @@ public class program1 implements Comp{
 			for(int i = 0; i < 100; i+=freq){
 				double del_percent = (double)i /100;
 				double coverage = (double)(100-i)/100;
-//				System.out.println("coverage:"+ coverage*100+"%");
+				System.out.println("coverage:"+ coverage*100+"%");
 //				res_ = Tool.DelTestCase(res_, (int)(0.1* tmp_.length));
 				int[] result = example.calc_arr(res_, GenerateType_list,num_list);
 //				System.out.println("Length of test case:"+result.length);
-				if(printDetail)
-				System.out.println(Arrays.toString(result));
+				if(printDetail){
+					System.out.println("result of test case:");
+					System.out.println("right result:"+Arrays.toString(result));
+				}
 				
 				int[] result_bug = example_bug.calc_arr(res_, GenerateType_list_1,num_list_1);
 				if(printDetail)
-				System.out.println(Arrays.toString(result_bug));
+					System.out.println("wrong result:"+Arrays.toString(result_bug));
 				
 				int[][]diff = Tool.compare_arr(result, result_bug, res_);
-//				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
+				System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
 				
-				if(printDetail)
-				Tool.printIntArray(diff);
+				if(printDetail){
+					System.out.println("test cases of different result");
+					Tool.printIntArray(diff);
+				}
 				
 				int found_fault = example.checkBug(diff,GenerateType_list,num_list);
 				System.out.println("found_fault:"+found_fault);
 				System.out.println();
-				
-//				res_ = Tool.DelTestCase(res_, (int)(0.1* tmp_.length));
-//				if( res_.length > 0){
-					res_ = Tool.DelTestCase(res_, (int)Math.ceil(((double)freq/100* tmp_.length)));
-//					if(res_.length == 0){
-//						break;
-//					}
-//				}else{
-//					break;
-//				}
+				res_ = Tool.DelTestCase(res_, (int)Math.ceil(((double)freq/100* tmp_.length)));
+
 			}
-			
-			
-//			
-//			//del whatever you want del 10%
-//			int[][] new_res = Tool.DelTestCase(res, (int)(0.1* res.length));
-//			int[] new_result2 = example.calc_arr(new_res,GenerateType_list,num_list);
-//			System.out.println(new_result2.length);
-//			System.out.println(Arrays.toString(new_result2));	
-//			
-////			
-////			
-//			System.out.println("");
-//			System.out.println("MultiCoverage");
-//			int[][] res1 = example.generateMultiCoverage(GenerateType_list, num_list);
-//			int[] result1 = example.calc_arr(res1, GenerateType_list,num_list);
-//			System.out.println(result1.length);
-//			System.out.println(Arrays.toString(result1));
-//			
-//			//del whatever you want del 10%
-//			int[][] new_res1 = Tool.DelTestCase(res1, (int)(0.1* res1.length+1));
-//			int[] result3 = example.calc_arr(new_res1,GenerateType_list,num_list);
-//			System.out.println(result3.length);
-//			System.out.println(Arrays.toString(result3));	
-//			
-			
-			
-			
+		
 	}
 
 	@Override
