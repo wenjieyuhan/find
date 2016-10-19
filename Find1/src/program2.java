@@ -1,5 +1,8 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import csvreader.CsvWriter;
 
 
 public class program2 implements Comp{
@@ -208,7 +211,141 @@ public class program2 implements Comp{
 //		System.out.println(arr.length);
 		return arr;
 	}
+	public static void generateData(CsvWriter writer) throws IOException{
+		ArrayList<String> arrlist = new ArrayList<String>();
+		arrlist.add("Program2(path)");
+		arrlist.add("5");
+		boolean printDetail = false;
+	    int freq = 20;
+		//right program
+		ArrayList<Integer> num_list = new ArrayList<Integer>(); 
+		ArrayList<GenerateType> GenerateType_list = new ArrayList<GenerateType>(); 
+		int arr[] = {1,2,3,7,9,3,2,1,1,4,4,2,3,4,9,3,2,1,2};
+		for(int val: arr){
+			num_list.add(val);
+		}
+		
+		//set up type; 
+		GenerateType gt_arr[] = 
+			{GenerateType.LARGE,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
+					GenerateType.LESS,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
+					GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
+					GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL,
+					GenerateType.LESS,GenerateType.LESS_EQUAL	
+			};
+		for(GenerateType t : gt_arr){
+			GenerateType_list.add(t);
+		}
+		
+		//seeded program
 
+		ArrayList<Integer> num_list_1 = new ArrayList<Integer>(); 
+		ArrayList<GenerateType> GenerateType_list_1 = new ArrayList<GenerateType>(); 
+		int arr_1[] = {1,2,3,7,9,3,2,1,1,4,4,2,3,4,9,3,2,1,2};
+		// no4 9 no8 5
+		for(int val: arr_1){
+			num_list_1.add(val);
+		}
+		
+		//set up type; 
+		GenerateType gt_arr_1[] = 
+			
+			{GenerateType.LARGE,GenerateType.LARGE,GenerateType.EQUAL,GenerateType.LESS,
+					GenerateType.LESS,GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,
+					GenerateType.LESS_EQUAL,GenerateType.LESS_EQUAL,GenerateType.LARGE_EQUEAL,GenerateType.LESS,
+					GenerateType.LARGE,GenerateType.LARGE,GenerateType.LESS_EQUAL,GenerateType.LESS,GenerateType.LESS_EQUAL,
+					GenerateType.LESS,GenerateType.LESS_EQUAL
+			};
+		for(GenerateType t : gt_arr_1){
+			GenerateType_list_1.add(t);
+		}
+		
+		
+		program2 example = new program2();
+		program2_bug example_bug = new program2_bug();
+		System.out.println("PathCoverage");
+		// example1
+		
+		int [][] tmp = example.generatePathCoverage(GenerateType_list, num_list);
+		int[][] res = tmp;
+		for(int i = 0; i < 100; i+=freq){
+			double del_percent = (double)i /100;
+			double coverage = (double)(100-i)/100;
+//			System.out.println("coverage:"+ coverage*100+"%");
+//			res = Tool.DelTestCase(res, (int)(0.1* tmp.length));
+			int[] result = example.calc_arr(res, GenerateType_list,num_list);
+//			System.out.println("Length of test case:"+result.length);
+			if(printDetail)
+			System.out.println(Arrays.toString(result));
+			
+			int[] result_bug = example_bug.calc_arr(res, GenerateType_list_1,num_list_1);
+			if(printDetail)
+			System.out.println(Arrays.toString(result_bug));
+			
+			int[][]diff = Tool.compare_arr(result, result_bug, res);
+			System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res.length);
+			
+			if(printDetail)
+			Tool.printIntArray(diff);
+			
+			int found_fault = example.checkBug(diff,GenerateType_list,num_list);
+			
+			arrlist.add(result.length+"");
+			arrlist.add(found_fault+"");
+			arrlist.add(coverage*100+"%");
+			
+			System.out.println("found_fault:"+found_fault);
+			System.out.println();
+//			System.out.println((double)freq/100 *  tmp.length);
+			res = Tool.DelTestCase(res, (int)Math.ceil(((double)freq/100* tmp.length)));
+		}
+	
+		writer.writeRecord((String[])arrlist.toArray(new String[arrlist.size()]));
+		
+		arrlist = new ArrayList<String>();
+		arrlist.add("Program 2(multiple)");
+		arrlist.add("5");
+		
+		
+		System.out.println("MultiCoverage");
+		// example1
+		
+		int [][] tmp_ = example.generateMultiCoverage(GenerateType_list, num_list);
+		
+		int[][] res_ = tmp_;
+		for(int i = 0; i < 100; i+=freq){
+			double del_percent = (double)i /100;
+			double coverage = (double)(100-i)/100;
+//			System.out.println("coverage:"+ coverage*100+"%");
+//			res_ = Tool.DelTestCase(res_, (int)(0.1* tmp_.length));
+			int[] result = example.calc_arr(res_, GenerateType_list,num_list);
+//			System.out.println("Length of test case:"+result.length);
+			if(printDetail)
+			System.out.println(Arrays.toString(result));
+			
+			int[] result_bug = example_bug.calc_arr(res_, GenerateType_list_1,num_list_1);
+			if(printDetail)
+			System.out.println(Arrays.toString(result_bug));
+			
+			int[][]diff = Tool.compare_arr(result, result_bug, res_);
+//			System.out.println("Length of different/ Length of test case:"+diff.length+"/"+res_.length);
+			
+			if(printDetail)
+			Tool.printIntArray(diff);
+			
+			int found_fault = example.checkBug(diff,GenerateType_list,num_list);
+			System.out.println("found_fault:"+found_fault);
+			System.out.println();
+			
+			arrlist.add(result.length+"");
+			arrlist.add(found_fault+"");
+			arrlist.add(coverage*100+"%");
+			res_ = Tool.DelTestCase(res_, (int)Math.ceil(((double)freq/100* tmp_.length)));
+
+		}
+		writer.writeRecord((String[])arrlist.toArray(new String[arrlist.size()]));
+		
+	}
 	public static void main(String[] args) {
 		    boolean printDetail = false;
 		    int freq = 20;
