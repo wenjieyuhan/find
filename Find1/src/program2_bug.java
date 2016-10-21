@@ -17,32 +17,36 @@ public class program2_bug implements Comp{
 //				num1 = num1+3 --> num1 = num1 +4; level2
 				num1 = num1 +4;
 			}else{
-				num1 -= 2;
+//				num1 -=2 --> num1 +=2 level2
+				num1 += 2;
 			}
 		}else{
 			if(result[4]){
 				num1 +=5;
 			}else{
+			
 				num1 -=6;
 			}
 		}
 		if(result[5] || result[6]){
-			num1 += 4;
+			//num1+= 4 --> num1+=5; level1
+			num1 += 5;
 		}else{
 			if(result[7]){
-//				
-				num1 +=1;
+//				num1+=1 --> num1-=2
+				num1 -=2;
 			}else{
 				//num1*=2 -> num1+=2 level2
 				num1 += 2;
 			}
 		}
 		if(result[8] && result[9]  || result[10] &&result[11] || result[12]){
-			
-			num1 += 11;
+//			num1+=11 --》 num1+=12;
+			num1 += 12;
 		}else{
 			if(result[12] || result[13]){
-				num1 += 5;
+				//num1+=5 --> num1+=7
+				num1 += 7;
 			}else{
 				if(result[14]|| result[15]  && result[16]){
 					num1 -= 6;

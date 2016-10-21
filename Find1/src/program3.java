@@ -214,7 +214,7 @@ public class program3 implements Comp{
 	public static void generateData(CsvWriter writer) throws IOException{
 		ArrayList<String> arrlist = new ArrayList<String>();
 		arrlist.add("Program3(path)");
-		arrlist.add("3");
+		arrlist.add("10");
 		
 		boolean printDetail = false;
 	    int freq = 20;
@@ -302,8 +302,8 @@ public class program3 implements Comp{
 		writer.writeRecord((String[])arrlist.toArray(new String[arrlist.size()]));
 		
 		arrlist = new ArrayList<String>();
-		arrlist.add("Program 3(multiple)");
-		arrlist.add("5");
+		arrlist.add("Program3(multiple)");
+		arrlist.add("10");
 		System.out.println("MultiCoverage");
 		// example1
 		
@@ -466,21 +466,16 @@ public class program3 implements Comp{
 	@Override
 	public int checkBug(int[][] arr, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
 		
-		int bugs[] = {0,0,0,0,0};
+		int bugs[] = {0,0,0,0,0,0,0,0,0,0};
 		
 		for(int i = 0 ; i < arr.length; i++){
-			int bug[] = {0,0,0,0,0};
-//			System.out.println(arr[i].length);
+			int bug[] = {0,0,0,0,0,0,0,0,0,0};
 
 			boolean[] result = new boolean[arr[i].length];
 			for(int j = 0; j < arr[i].length; j++){
 				result[j] = (Tool.compare(arr[i][j], num_list.get(j), GenerateType_list.get(j)));
-//				result[j] = false;
 			}
-			boolean error13 = Tool.compare(arr[i][13], 1, GenerateType_list.get(16));
-			
-//			System.out.println(result[5] + ".."+result[6]);
-//			System.out.println(Arrays.toString(result));
+		
 			if((result[8] && result[9]  || result[10] &&result[11]) == false 
 					&&((result[12] && result[13]) == false) 
 					&& (result[14]|| result[15]  && result[16]) == false
@@ -504,10 +499,34 @@ public class program3 implements Comp{
 				bug[4] = 1;
 				bugs[4] = 1;
 			}
-//			System.out.println(i+":"+Arrays.toString(bug));
+			if((result[8] && result[9]  || result[10] &&result[11]) == false && 
+					(result[12] || result[13]) == true
+					){
+				bug[5] = 1;
+				bugs[5] =1;
+			}
+			if(result[0] && result[3]){
+				bug[6] = 1;
+				bugs[6] =1;
+			}
+			if((result[5] || result[6]) == true){
+				bug[7] = 1;
+				bugs[7] =1;
+			}
+			if((result[5] || result[6]) == false 
+					&& result[7] == true
+							){
+				bug[8] = 1;
+				bugs[8] =1;
+			}
+			if(result[8] && result[9]  || result[10] &&result[11]){
+				bug[9] = 1;
+				bugs[9] =1;
+			}
+			
 		}
 		int count = 0;
-		for(int l = 0; l < 5; l++){
+		for(int l = 0; l < bugs.length; l++){
 			if(bugs[l] == 1){
 				count++;
 			}

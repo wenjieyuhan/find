@@ -660,4 +660,11 @@ public class Tool {
         }
         return result.toString();
     }
+    
+    public static String[]  add(String[] arr , String newString){
+    	String [] arr1 = new String[arr.length+1];
+    	System.arraycopy(arr, 0, arr1, 0, arr.length);
+    	arr1[arr.length] = newString;
+    	return arr1;
+    }
 }

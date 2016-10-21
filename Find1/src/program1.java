@@ -204,7 +204,7 @@ public class program1 implements Comp{
 	public static void generateData(CsvWriter writer) throws IOException{
 		ArrayList<String> arrlist = new ArrayList<String>();
 		arrlist.add("Program1(path)");
-		arrlist.add("5");
+		arrlist.add("10");
 		
 	    boolean printDetail = false;
 	    int freq = 20;
@@ -295,8 +295,8 @@ public class program1 implements Comp{
 		writer.writeRecord((String[])arrlist.toArray(new String[arrlist.size()]));
 		
 		arrlist = new ArrayList<String>();
-		arrlist.add("Program 1(multiple)");
-		arrlist.add("5");
+		arrlist.add("Program1(multiple)");
+		arrlist.add("10");
 		
 		System.out.println("MultiCoverage");
 		// example1
@@ -464,10 +464,10 @@ public class program1 implements Comp{
 	@Override
 	public int checkBug(int[][] arr, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
 		
-		int bugs[] = {0,0,0,0,0};
+		int bugs[] = {0,0,0,0,0,0,0,0,0,0};
 		
 		for(int i = 0 ; i < arr.length; i++){
-			int bug[] = {0,0,0,0,0};
+			int bug[] = {0,0,0,0,0,0,0,0,0,0,0};
 //			System.out.println(arr[i].length);
 
 			boolean[] result = new boolean[arr[i].length];
@@ -502,10 +502,36 @@ public class program1 implements Comp{
 				bug[4] = 1;
 				bugs[4] = 1;
 			}
-//			System.out.println(i+":"+Arrays.toString(bug));
+			if((result[0] && result[1]) == true && result[3] == true) {
+				bug[5] = 1;
+				bugs[5] = 1;
+			}
+			if((result[0] && result[1]) == false && result[4] == false) {
+				bug[6] = 1;
+				bugs[6] = 1;
+			}
+			if((result[8] && result[9]  || result[10] &&result[11]) == true){
+				bug[7] =1;
+				bugs[7] =1;
+			}
+			if(result[12] && result[13] == false &&
+					(result[14] || result[15] &&result[16])
+					== true
+					){
+				bug[8] =1;
+				bugs[8] =1;
+			}
+			if((result[5] || result[6]) == false 
+					&&result[7] == false
+					){
+				bug[9] =1;
+				bugs[9] =1;
+			}
+		
+//			
 		}
 		int count = 0;
-		for(int l = 0; l < 5; l++){
+		for(int l = 0; l < bugs.length; l++){
 			if(bugs[l] == 1){
 				count++;
 			}

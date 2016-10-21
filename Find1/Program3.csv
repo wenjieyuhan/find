@@ -1,0 +1,11 @@
+Program,Number of seeded faults,Number of test cases,Number of detected fault,Coverage rate,Number of test cases(delete 20%),Number of detected fault(delete 20%),Coverage rate,Number of test cases(delete 60%),Number of detected fault(delete 60%),Coverage rate,Number of test cases(delete 60%),Number of detected fault(delete 60%),Coverage rate,Number of test cases(delete 80%),Number of detected fault(delete 80%),Coverage rate
+Program3(path),10,144,6,100.0%,115,6,80.0%,86,6,60.0%,57,6,40.0%,28,6,20.0%
+Program3(multiple),10,32,10,100.0%,25,10,80.0%,18,10,60.0%,11,10,40.0%,4,9,20.0%
+Program3(path),10,144,8,100.0%,115,8,80.0%,86,8,60.0%,57,8,40.0%,28,8,20.0%
+Program3(multiple),10,32,10,100.0%,25,10,80.0%,18,10,60.0%,11,10,40.0%,4,6,20.0%
+Program3(path),10,144,8,100.0%,115,8,80.0%,86,8,60.0%,57,8,40.0%,28,8,20.0%
+Program3(multiple),10,32,10,100.0%,25,10,80.0%,18,10,60.0%,11,10,40.0%,4,6,20.0%
+Program3(path),10,144,8,100.0%,115,8,80.0%,86,8,60.0%,57,8,40.0%,28,8,20.0%
+Program3(multiple),10,32,10,100.0%,25,10,80.0%,18,10,60.0%,11,10,40.0%,4,8,20.0%
+Program3(path),10,144,6,100.0%,115,6,80.0%,86,6,60.0%,57,6,40.0%,28,6,20.0%
+Program3(multiple),10,32,10,100.0%,25,10,80.0%,18,10,60.0%,11,10,40.0%,4,6,20.0%

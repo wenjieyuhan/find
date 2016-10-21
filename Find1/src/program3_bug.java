@@ -14,7 +14,8 @@ public class program3_bug implements Comp{
 		//result[0] result[1] result[2] level1
 		if(result[0]){
 			if(result[3]){
-				num1 = num1 +3;
+				//num1 = num1+3--> num1= num1+2
+				num1 = num1 +2;
 			}else{
 				num1 -= 2;
 			}
@@ -28,21 +29,24 @@ public class program3_bug implements Comp{
 			}
 		}
 		if(result[5] || result[6]){
+			//num1 +=5 --> num1+=4
 			num1 += 4;
 		}else{
 			if(result[7]){
-//				
-				num1 +=1;
+//				num1+=1 --> num1+=2
+				num1 +=2;
 			}else{
 				//num1*=2 -> num1+=2 level2
 				num1 += 2;
 			}
 		}
 		if(result[8] && result[9]  || result[10] &&result[11]){
+//			num1 += 11 --> num1+12;
 			num1 += 11;
 		}else{
 			if(result[12] || result[13]){
-				num1 += 5;
+//				num1+5 --> num1+=6
+				num1 += 6;
 			}else{
 				if(result[14]|| result[15]  && result[16]){
 					num1 -= 6;
