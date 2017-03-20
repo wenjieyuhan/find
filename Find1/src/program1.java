@@ -9,7 +9,7 @@ public class program1 implements Comp{
 
 	@Override
 	public int calc(int[] val, ArrayList<GenerateType> GenerateType_list, ArrayList<Integer> num_list) {
-		int num1 = 5;
+		int num1 = 5;//sss
 		boolean[] result = new boolean[val.length];
 		for(int i = 0; i < val.length; i++){
 			result[i] = (Tool.compare(val[i], num_list.get(i), GenerateType_list.get(i)));
