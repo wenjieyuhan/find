@@ -24,6 +24,7 @@ public class program4 implements Comp{
 				num1 -=2;
 			}
 		}
+		///dddd
 		if(result[5] || result[6]){
 			num1 += 2;
 		}else{
