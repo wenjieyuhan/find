@@ -14,7 +14,7 @@ public class program4 implements Comp{
 		for(int i = 0; i < val.length; i++){
 			result[i] = (Tool.compare(val[i], num_list.get(i), GenerateType_list.get(i)));
 		}
-		//ab
+		//abddd
 		if(result[0] && result[1] && result[2]){
 			num1 = num1 *2;
 		}else{
